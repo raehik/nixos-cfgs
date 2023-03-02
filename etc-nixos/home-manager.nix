@@ -19,7 +19,7 @@
       ripgrep
       udisks
       cifs-utils
-      ntfs-3g
+      ntfs3g
       atool
 
       # development

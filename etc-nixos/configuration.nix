@@ -18,7 +18,7 @@
   i18n.supportedLocales = [
     "en_US.UTF-8/UTF-8"
     "ja_JP.UTF-8/UTF-8"
-    #"ja_JP.SJIS/SJIS" # 2022-12-14 raehik TODO ugh. not supported. fu
+    # "ja_JP.SJIS/SJIS" # 2022-12-14 raehik: not supported!
     "ja_JP.EUC-JP/EUC-JP"
     "C.UTF-8/UTF-8" # 2023-01-11 raehik: idk, apparently important
   ];
@@ -33,8 +33,7 @@
   services.udisks2.enable = true;
 
   imports =
-    [ ./hardware-configuration.nix ./boot.nix
-      ./nixos.nix
+    [ ./boot/alex.nix
       ./terminal.nix
       ./user.nix
       ./podman.nix
@@ -46,6 +45,10 @@
       ./cachix.nix
       ./substitutors/iog.nix
     ];
+
+  nixpkgs.config.allowUnfree = true;
+  programs.nix-ld.enable = true;
+  nix.settings.extra-experimental-features = "flakes nix-command";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

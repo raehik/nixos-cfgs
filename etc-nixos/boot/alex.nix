@@ -9,7 +9,7 @@ let
   efiDevice = "/dev/disk/by-partlabel/raehik-1tb-nvme-alex-efi";
   rootDevice = "/dev/disk/by-partlabel/raehik-1tb-nvme-alex-nixos";
   luksDMName = "cryptroot";
-  rootLV = "/dev/mapper/${luksDMName}"
+  rootLV = "/dev/mapper/${luksDMName}";
   makeCompressedBtrfsSubvol = name: opts: {
     fsType = "btrfs";
     device = rootLV;
