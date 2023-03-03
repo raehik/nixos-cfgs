@@ -8,6 +8,11 @@
 
 {
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nixpkgs.config.allowUnfree = true;
+  programs.nix-ld.enable = true;
+
   time.timeZone = "Europe/London";
 
   programs.zsh.enable = true;
@@ -41,14 +46,11 @@
       ./graphical.nix
       ./printing.nix
       ./gaming.nix
-      <home-manager/nixos> ./home-manager.nix
+      # <home-manager/nixos> # flake handles differently
+      ./home-manager.nix
       ./cachix.nix
       ./substitutors/iog.nix
     ];
-
-  nixpkgs.config.allowUnfree = true;
-  programs.nix-ld.enable = true;
-  nix.settings.extra-experimental-features = "flakes nix-command";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

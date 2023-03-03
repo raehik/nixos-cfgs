@@ -3,7 +3,7 @@
 {
 
   services.printing.enable = true;
-  services.printing.drivers = with pkgs; [ epson-escpr cnijfilter2 ];
+  services.printing.drivers = with pkgs; [epson-escpr cnijfilter2];
 
   services.avahi.enable = true;
   services.avahi.nssmdns = false; # Use the settings from below

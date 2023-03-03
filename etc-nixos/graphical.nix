@@ -2,9 +2,11 @@
 
 {
 
-  # TODO Japanese IME. they all suck but fcitx kinda semi works
-  i18n.inputMethod.enabled = "fcitx";
-  i18n.inputMethod.fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
+  # TODO 2023-03-03 Japanese IME. they all suck
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [fcitx5-mozc fcitx5-gtk];
+  };
 
   # video (should be fairly global?)
   hardware.opengl = {
