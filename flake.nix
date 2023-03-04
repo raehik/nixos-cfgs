@@ -1,4 +1,5 @@
 {
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
@@ -7,17 +8,26 @@
     };
   };
 
-  outputs = inputs: {
-    nixosConfigurations.kfc = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+  outputs = { self, nixpkgs, ... }@inputs:
+  let
+    lib = import ./lib inputs;
+    nixosSystem' = name: system: nixpkgs.lib.nixosSystem {
+      system = system;
       modules = [
-        ./etc-nixos/configuration.nix
-        # "make home manager available to configuration.nix" (?)
+        ({ ... }: {
+          # need this! home-manager fails without it :O
+          nix.settings.experimental-features = ["nix-command" "flakes"];
+        })
+        ./sys/${name}.nix
+        # TODO
         inputs.home-manager.nixosModules.home-manager {
-          # have home-manager use system-level nixpkgs
+          # TODO
           home-manager.useGlobalPkgs = true;
         }
       ];
     };
+  in {
+    nixosConfigurations.kfc = nixosSystem' "kfc" "x86_64-linux";
   };
+
 }

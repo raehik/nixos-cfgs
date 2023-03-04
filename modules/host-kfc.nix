@@ -1,6 +1,14 @@
 { config, pkgs, lib, ... }:
 
-{
+let
+  efiDevice  = "/dev/disk/by-partlabel/raehik-kfc-efi";
+  rootDevice = "/dev/disk/by-partlabel/raehik-kfc-nixos";
+in  {
+
+  imports = [
+    # set up filesystems: EFI, 1 LUKS btrfs, subvols
+    (import ./lib/fs-efi-luks-btrfs-subvol.nix efiDevice rootDevice)
+  ];
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -12,6 +20,8 @@
       "C.UTF-8/UTF-8" # 2023-01-11 raehik: idk, apparently important
     ];
   };
+
+  time.timeZone = "Europe/London";
 
   networking = {
     hostName = "kfc";
