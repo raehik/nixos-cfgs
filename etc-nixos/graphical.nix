@@ -45,4 +45,10 @@
     };
   };
 
+  # swaylock needs some stuff, this does it
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true; # TODO ? wat dis
+  };
+
 }

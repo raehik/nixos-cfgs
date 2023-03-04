@@ -28,29 +28,20 @@
     "C.UTF-8/UTF-8" # 2023-01-11 raehik: idk, apparently important
   ];
 
-  networking.hostName = "nixos-usbtmp22";
-  networking.networkmanager.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    pulseaudio # needed for pactl, which I use with PipeWire
+  imports = [
+    ./hardware-kfc.nix
+    ./host-kfc.nix
+    ./user.nix
+    ./podman.nix
+    ./audio.nix
+    ./graphical.nix
+    ./printing.nix
+    ./gaming.nix
+    # <home-manager/nixos> # flake handles differently
+    ./home-manager.nix
+    ./cachix.nix
+    ./substitutors/iog.nix
   ];
-
-  services.udisks2.enable = true;
-
-  imports =
-    [ ./boot/alex.nix
-      ./terminal.nix
-      ./user.nix
-      ./podman.nix
-      ./audio.nix
-      ./graphical.nix
-      ./printing.nix
-      ./gaming.nix
-      # <home-manager/nixos> # flake handles differently
-      ./home-manager.nix
-      ./cachix.nix
-      ./substitutors/iog.nix
-    ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

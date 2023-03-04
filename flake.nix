@@ -8,7 +8,7 @@
   };
 
   outputs = inputs: {
-    nixosConfigurations.alex = inputs.nixpkgs.lib.nixosSystem {
+    nixosConfigurations.kfc = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         ./etc-nixos/configuration.nix

@@ -2,6 +2,7 @@
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
+
   #nix.extraOptions = {
   #  keep-derivations = true;
   #  keep-outputs = true;
@@ -15,7 +16,9 @@
 
     home.packages = with pkgs; [
       # basic
+      openssl
       neovim
+      tmux
       ripgrep
       udisks
       cifs-utils
@@ -27,13 +30,19 @@
       gcc
 
       # graphical
+      gammastep
+      sway
+      i3status-rust
       wl-clipboard
       mako
       slurp
       grim
-      hexchat
 
       # graphical apps
+      foot
+      pavucontrol
+      firefox
+      hexchat
       sxiv
       zathura
       discord
