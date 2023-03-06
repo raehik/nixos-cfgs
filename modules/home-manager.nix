@@ -42,6 +42,7 @@
       foot
       pavucontrol
       firefox
+      chromium
       hexchat
       sxiv
       zathura
