@@ -1,6 +1,6 @@
-efiDevice: rootDevice: { ... }:
+# Needs more setup elsewhere too.
 
-let
+efiDevice: rootDevice: { pkgs, ... }: let
 
   luksName = "cryptroot";
   luksDevice = "/dev/mapper/${luksName}";
@@ -20,8 +20,15 @@ in
   fileSystems."/home" = mkCompressedBtrfsSubvol "home" [];
   fileSystems."/nix"  = mkCompressedBtrfsSubvol "nix"  ["noatime"];
 
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
+  environment.systemPackages = with pkgs; [
+    sbctl # for troubleshooting Secure Boot
+  ];
 
   fileSystems."/boot" = { device = efiDevice; fsType = "vfat"; };
 

@@ -6,8 +6,8 @@ let
 in  {
 
   imports = [
-    # set up filesystems: EFI, 1 LUKS btrfs, subvols
-    (import ./lib/fs-efi-luks-btrfs-subvol.nix efiDevice rootDevice)
+    # set up filesystems: EFI (Secure Boot), 1 LUKS btrfs, subvols
+    (import ./lib/fs-efi-sb-luks-btrfs-subvol.nix efiDevice rootDevice)
   ];
 
   i18n = {
