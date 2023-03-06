@@ -27,6 +27,7 @@
 
       # development
       git
+      delta # for nicer git diff
       gcc
 
       # graphical
