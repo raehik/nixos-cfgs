@@ -8,20 +8,6 @@
     fcitx5.addons = with pkgs; [fcitx5-mozc fcitx5-gtk];
   };
 
-  # video (should be fairly global?)
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-  };
-
-  # 2022-12-14 raehik: endless issues with NVIDIA GTX 1080 unfree drivers (both
-  # propriotary and open). so I think by not specifying, we should get free
-  # (= nouveau/mesa)
-  # needed a kernel param to disable GSP (NVreg_EnableGPU??)
-
   fonts.fonts = with pkgs; [
     noto-fonts
     noto-fonts-cjk

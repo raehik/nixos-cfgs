@@ -20,18 +20,21 @@
   hardware.enableRedistributableFirmware = true; # need for iwlwifi
   hardware.enableAllFirmware = true; # idk gimme it all
 
+  # video drivers
   # I HATE NVIDIA GRAAAAAHHHH
   #boot.kernelParams = ["nomodeset"]; # required for builtin/free drivers
   nixpkgs.config.allowUnfree = true;
   services.xserver.videoDrivers = ["nvidia"];
   #hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.modesetting.enable = true;
+  hardware.opengl = {
+    enable = true;
+  };
 
+  # generated!
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-
-  #nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
 }

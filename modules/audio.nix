@@ -1,7 +1,7 @@
+{ pkgs, ... }:
+
 {
 
-  # 2022-12-14 raehik: PipeWire seems best. fancy. needs some PulseAudio bits
-  # though
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -9,7 +9,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
 
-    # 2022-12-14 raehik TODO not tested
     config.pipewire-pulse = {
       "context.exec" = [
         # among other stuff, gives nice "mute on unplug" behaviour
@@ -19,8 +18,10 @@
       ];
     };
 
-    #jack.enable = true;
-
   };
+
+  environment.systemPackages = with pkgs; [
+    pulseaudio # needed for pactl, which I use with PipeWire
+  ];
 
 }

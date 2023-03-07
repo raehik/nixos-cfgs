@@ -1,9 +1,11 @@
 { config, pkgs, lib, ... }:
 
 let
-  efiDevice  = "/dev/disk/by-partlabel/raehik-kfc-efi";
-  rootDevice = "/dev/disk/by-partlabel/raehik-kfc-nixos";
-in  {
+  #efiDevice  = "/dev/disk/by-partlabel/raehik-pichu-efi";
+  #rootDevice = "/dev/disk/by-partlabel/raehik-pichu-nixos";
+  efiDevice  = "/dev/disk/by-partlabel/raehik-1tb-nvme-alex-efi";
+  rootDevice = "/dev/disk/by-partlabel/raehik-1tb-nvme-alex-nixos";
+in {
 
   imports = [
     # set up filesystems: EFI (Secure Boot), 1 LUKS btrfs, subvols
@@ -24,7 +26,7 @@ in  {
   time.timeZone = "Europe/London";
 
   networking = {
-    hostName = "kfc";
+    hostName = "pichu";
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
   };

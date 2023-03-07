@@ -5,8 +5,8 @@ let
 in {
 
   imports = importModules [
-    "hardware-kfc"
-    "host-kfc"
+    "hardware-pichu"
+    "host-pichu"
     "boot/secure-boot/lanzaboote"
     "assorted"
     "user"
@@ -15,7 +15,6 @@ in {
     "graphical"
     "printing"
     "gaming"
-    # <home-manager/nixos> # flake handles differently
     "home-manager"
     "cachix"
     "substitutors/iog"

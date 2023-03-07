@@ -12,7 +12,7 @@
     };
   };
 
-  outputs = inputs:
+  outputs = inputs@{ self, nixpkgs, ... }:
   let
     lib = import ./lib inputs;
     nixosSystem' = name: system: inputs.nixpkgs.lib.nixosSystem {
@@ -22,6 +22,9 @@
         ({ ... }: {
           # need this! home-manager fails without it :O
           nix.settings.experimental-features = ["nix-command" "flakes"];
+
+          # null on dirty worktree :)
+          system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
         })
 
         # Secure Boot via lanzaboote
@@ -38,7 +41,8 @@
       ];
     };
   in {
-    nixosConfigurations.kfc = nixosSystem' "kfc" "x86_64-linux";
+    nixosConfigurations.kfc   = nixosSystem' "kfc"   "x86_64-linux";
+    nixosConfigurations.pichu = nixosSystem' "pichu" "x86_64-linux";
   };
 
 }
