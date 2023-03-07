@@ -1,10 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  #efiDevice  = "/dev/disk/by-partlabel/raehik-pichu-efi";
-  #rootDevice = "/dev/disk/by-partlabel/raehik-pichu-nixos";
-  efiDevice  = "/dev/disk/by-partlabel/raehik-1tb-nvme-alex-efi";
-  rootDevice = "/dev/disk/by-partlabel/raehik-1tb-nvme-alex-nixos";
+  efiDevice  = "/dev/disk/by-partlabel/raehik-pichu-efi";
+  rootDevice = "/dev/disk/by-partlabel/raehik-pichu-nixos";
 in {
 
   imports = [
