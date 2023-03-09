@@ -41,6 +41,10 @@
       slurp
       grim
 
+      # terminal apps
+      mpd
+      ncmpcpp
+
       # graphical apps
       foot
       pavucontrol
