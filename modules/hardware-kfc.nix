@@ -20,6 +20,12 @@
   hardware.enableRedistributableFirmware = true; # need for iwlwifi
   hardware.enableAllFirmware = true; # idk gimme it all
 
+  # looks like Lenovo supports fwupd with this laptop
+  # ...I wasn't able to use it due to poor interaction with Secure Boot. I could
+  # disable Secure Boot and use, but at that point I could just use Windows.
+  # Lol. regardless, here it is.
+  services.fwupd.enable = true;
+
   # video drivers
   # I HATE NVIDIA GRAAAAAHHHH
   #boot.kernelParams = ["nomodeset"]; # required for builtin/free drivers
