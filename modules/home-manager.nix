@@ -24,6 +24,8 @@
       cifs-utils
       ntfs3g
       atool
+      unzip
+      zip
 
       # development
       git
