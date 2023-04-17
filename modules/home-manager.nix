@@ -44,6 +44,7 @@
       # terminal apps
       mpd
       ncmpcpp
+      weechat
 
       # graphical apps
       foot
