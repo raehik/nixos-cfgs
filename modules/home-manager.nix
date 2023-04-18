@@ -26,6 +26,7 @@
       atool
       unzip
       zip
+      p7zip
 
       # development
       git
