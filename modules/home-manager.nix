@@ -31,6 +31,7 @@
       # development
       git
       delta # for nicer git diff
+      gh # GitHub CLI tool (comes in handy)
       gcc
 
       # graphical
