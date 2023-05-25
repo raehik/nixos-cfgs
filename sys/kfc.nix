@@ -14,7 +14,6 @@ in {
     "audio"
     "graphical"
     "printing"
-    "gaming"
     # <home-manager/nixos> # flake handles differently
     "home-manager"
     "cachix"
