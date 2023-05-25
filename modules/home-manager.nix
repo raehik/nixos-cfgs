@@ -20,14 +20,18 @@
       neovim
       tmux
       ripgrep
+      ## filesystems
       udisks
       cifs-utils
       ntfs3g
+      ## files
       atool
       unzip
       zip
       p7zip
       unrar
+      ## admin
+      htop
 
       # development
       git
@@ -43,6 +47,7 @@
       mako
       slurp
       grim
+      xdg-utils
 
       # terminal apps
       mpd
