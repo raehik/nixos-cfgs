@@ -8,11 +8,26 @@
   nix.settings.max-jobs = 4;
 
   # configure zram blocks for swap use
-  # TODO. hoping this eases memory issues on this 16-core with 16 GB (silly).
   # default probably reserves total_mem / 2 for swap.
+  # decent-seeming guide: https://unix.stackexchange.com/q/594817
+  # apparently want ~1.5x RAM to maximize available swap
+  # (maybe higher for higher-compression algorithms like zstd)
+  # lz4 is high-speed, ~2.5x compression (depends)
+  # zstd is slow but pushes beyond 3x
   zramSwap = {
     enable = true;
     algorithm = "lz4";
+    memoryPercent = 150;
+  };
+
+  # recommended settings from https://wiki.archlinux.org/title/Zram
+  # we want high swappiness because our swap is on our RAM!
+  # 150-200 seems recommended.
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 200;
+    "vm.watermark_boost_factor" = 0;
+    "vm.watermark_scale_factor" = 125;
+    "vm.page-cluster" = 0;
   };
 
   # keyboard layout
