@@ -7,6 +7,14 @@
   # let's limit default max jobs. less concurrency but also less load+no crashes
   nix.settings.max-jobs = 4;
 
+  # configure zram blocks for swap use
+  # TODO. hoping this eases memory issues on this 16-core with 16 GB (silly).
+  # default probably reserves total_mem / 2 for swap.
+  zramSwap = {
+    enable = true;
+    algorithm = "lz4";
+  };
+
   # keyboard layout
   console.useXkbConfig = true;
   services.xserver.layout = "gb";
