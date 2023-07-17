@@ -2,6 +2,11 @@
 
 {
 
+  # this is a 16-core machine, but with only 16 GB RAM. I get to see a lot of
+  # hard crashes due to OOM. this is a Linux bug more than a Nix one, but...
+  # let's limit default max jobs. less concurrency but also less load+no crashes
+  nix.settings.max-jobs = 4;
+
   # keyboard layout
   console.useXkbConfig = true;
   services.xserver.layout = "gb";
