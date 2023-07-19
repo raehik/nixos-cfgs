@@ -2,18 +2,12 @@
 
 {
 
-  # this is a 16-core machine, but with only 16 GB RAM. I get to see a lot of
-  # hard crashes due to OOM. this is a Linux bug more than a Nix one, but...
-  # let's limit default max jobs. less concurrency but also less load+no crashes
-  nix.settings.max-jobs = 4;
-
   # configure zram blocks for swap use
-  # default probably reserves total_mem / 2 for swap.
   # decent-seeming guide: https://unix.stackexchange.com/q/594817
-  # apparently want ~1.5x RAM to maximize available swap
-  # (maybe higher for higher-compression algorithms like zstd)
-  # lz4 is high-speed, ~2.5x compression (depends)
-  # zstd is slow but pushes beyond 3x
+  # apparently want ~(expected compression ratio)x RAM for max swap, but many
+  # just say 1.5x
+  # lz4: ~2.5x compression, fast
+  # zstd: ~3x compression, slow
   zramSwap = {
     enable = true;
     algorithm = "lz4";
@@ -23,6 +17,7 @@
   # recommended settings from https://wiki.archlinux.org/title/Zram
   # we want high swappiness because our swap is on our RAM!
   # 150-200 seems recommended.
+  # other settings idk but Fedora ppl discussed em.
   boot.kernel.sysctl = {
     "vm.swappiness" = 200;
     "vm.watermark_boost_factor" = 0;
