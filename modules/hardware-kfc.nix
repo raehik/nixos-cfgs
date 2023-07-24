@@ -2,6 +2,8 @@
 
 {
 
+  # When ethernet borks, `modprobe -r e1000e && modprobe e1000e`.
+
   # configure zram blocks for swap use
   # decent-seeming guide: https://unix.stackexchange.com/q/594817
   # apparently want ~(expected compression ratio)x RAM for max swap, but many

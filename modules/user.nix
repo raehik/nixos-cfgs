@@ -11,7 +11,8 @@ in {
 
   users.users.${user.name} = {
     uid = user.uid;
-    extraGroups = [ "wheel" "audio" ];
+    extraGroups = [ "wheel" "audio" "networkmanager" ];
+    # TODO need to be in networkmanager group for non-sudo net stuff. ugly...
     isNormalUser = true;
   };
 
