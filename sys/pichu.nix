@@ -8,7 +8,7 @@ in {
     "hardware-pichu"
     "host-pichu"
     "boot/secure-boot/lanzaboote"
-    "resolved"
+    "net"
     "assorted"
     "user"
     "podman"

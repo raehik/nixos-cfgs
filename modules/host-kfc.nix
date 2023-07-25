@@ -25,8 +25,6 @@ in  {
 
   networking = {
     hostName = "kfc";
-    networkmanager.enable = true;
-    useDHCP = lib.mkDefault true;
   };
 
   services.udisks2.enable = true;

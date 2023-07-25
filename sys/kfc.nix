@@ -8,7 +8,7 @@ in {
     "hardware-kfc"
     "host-kfc"
     "boot/secure-boot/lanzaboote"
-    "resolved"
+    "net"
     "assorted"
     "user"
     "podman"
