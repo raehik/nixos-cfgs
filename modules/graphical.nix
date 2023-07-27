@@ -8,7 +8,7 @@
     fcitx5.addons = with pkgs; [fcitx5-mozc fcitx5-gtk];
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
