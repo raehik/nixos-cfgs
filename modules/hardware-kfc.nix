@@ -4,6 +4,10 @@
 
   # When ethernet borks, `modprobe -r e1000e && modprobe e1000e`.
 
+  # 16-core laptop with 16 GB RAM -> 16 jobs is too much, especially when
+  # compiling Haskell & C. 8 is fine.
+  nix.settings.max-jobs = 8;
+
   # configure zram blocks for swap use
   # decent-seeming guide: https://unix.stackexchange.com/q/594817
   # apparently want ~(expected compression ratio)x RAM for max swap, but many
