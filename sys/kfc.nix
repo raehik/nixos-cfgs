@@ -13,9 +13,9 @@ in {
     "user"
     "podman"
     "audio"
+    "bluetooth"
     "graphical"
     "print/home"
-    # <home-manager/nixos> # flake handles differently
     "home-manager"
     "cachix"
     "substitutors/iog"
