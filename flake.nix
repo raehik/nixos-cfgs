@@ -10,12 +10,16 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:
+
   let
+
     lib = import ./lib inputs;
-    nixosSystem' = name: system: inputs.nixpkgs.lib.nixosSystem {
+
+    nixosSystem' = system: extraModules: inputs.nixpkgs.lib.nixosSystem {
       system = system;
       modules = [
         # general & flake-related bits
@@ -23,26 +27,34 @@
           # need this! home-manager fails without it :O
           nix.settings.experimental-features = ["nix-command" "flakes"];
 
-          # null on dirty worktree :)
+          # set revision (obtain via nixos-version --json)
+          # null on dirty worktree!
           system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
         })
-
-        # Secure Boot via lanzaboote
-        inputs.lanzaboote.nixosModules.lanzaboote
 
         # TODO
         inputs.home-manager.nixosModules.home-manager {
           # TODO
           home-manager.useGlobalPkgs = true;
         }
-
-        # non-flake module
-        ./sys/${name}.nix
-      ];
+      ] ++ extraModules;
     };
+
   in {
-    nixosConfigurations.kfc   = nixosSystem' "kfc"   "x86_64-linux";
-    nixosConfigurations.pichu = nixosSystem' "pichu" "x86_64-linux";
+
+    nixosConfigurations.kfc   = nixosSystem' "x86_64-linux" [
+      sys/kfc.nix
+      inputs.lanzaboote.nixosModules.lanzaboote
+    ];
+    nixosConfigurations.pichu = nixosSystem' "x86_64-linux" [
+      sys/pichu.nix
+      inputs.lanzaboote.nixosModules.lanzaboote
+    ];
+    nixosConfigurations.reese = nixosSystem' "aarch64-linux" [
+      sys/reese.nix
+      inputs.nixos-hardware.nixosModules.raspberry-pi-4
+    ];
+
   };
 
 }

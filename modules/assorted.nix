@@ -18,9 +18,6 @@
 
     # adds to PATH, doesn't replace
     PATH = [ "\${XDG_BIN_HOME}" ];
-
-    # steam needs to find Proton-GE
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
 
 }

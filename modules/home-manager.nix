@@ -29,7 +29,7 @@
       unzip
       zip
       p7zip
-      unrar
+      #unrar # TODO: unfree...?!
       ## admin
       htop
 
@@ -62,7 +62,7 @@
       hexchat
       sxiv
       zathura
-      discord
+      discord # TODO: unfree
 
       # laptop
       brightnessctl
