@@ -25,6 +25,7 @@ in {
     algorithm = "lz4";
     memoryPercent = 150;
   };
+  swapDevices = []; # required for zram swap idk why shit fucked
 
   # the honest truth? a measly 2 GB RAM is worth shit all in this economy
   nix.settings.max-jobs = 1;
