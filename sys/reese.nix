@@ -15,6 +15,20 @@ in {
     };
   };
 
+  # decent-seeming guide: https://unix.stackexchange.com/q/594817
+  # apparently want ~(expected compression ratio)x RAM for max swap, but many
+  # just say 1.5x
+  # lz4: ~2.5x compression, fast
+  # # zstd: ~3x compression, slow
+  zramSwap = {
+    enable = true;
+    algorithm = "lz4";
+    memoryPercent = 150;
+  };
+
+  # the honest truth? a measly 2 GB RAM is worth shit all in this economy
+  nix.settings.max-jobs = 1;
+
   imports = importModules [
     "locale-raehik"
     "net"
@@ -61,7 +75,6 @@ in {
       git
       delta # for nicer git diff
       ## filesystems
-      #udisks
       cifs-utils
       ntfs3g
       ## files
@@ -76,6 +89,22 @@ in {
       # development
       gh # GitHub CLI tool (comes in handy)
     ];
+  };
+
+  services.udisks2.enable = true;
+
+  environment.systemPackages = [ pkgs.cifs-utils ];
+  fileSystems."/mnt/nas/cauldron/raehik" = {
+      device = "//cauldron.local/raehik";
+      fsType = "cifs";
+      options = let
+        # this line prevents hanging on network split
+        automount_opts =
+          "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=10s,x-systemd.mount-timeout=10s";
+        permission_opts = "uid=${toString config.users.users."raehik".uid},gid=${toString config.users.groups."users".gid}";
+
+      in
+      ["${automount_opts},credentials=/secret/samba/cauldron/raehik,${permission_opts}"];
   };
 
 }
