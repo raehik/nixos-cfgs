@@ -27,8 +27,19 @@ in {
   };
   swapDevices = []; # required for zram swap idk why shit fucked
 
-  # the honest truth? a measly 2 GB RAM is worth shit all in this economy
-  nix.settings.max-jobs = 1;
+  # recommended settings from https://wiki.archlinux.org/title/Zram
+  # we want high swappiness because our swap is on our RAM!
+  # 150-200 seems recommended.
+  # other settings idk but Fedora ppl discussed em.
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 200;
+    "vm.watermark_boost_factor" = 0;
+    "vm.watermark_scale_factor" = 125;
+    "vm.page-cluster" = 0;
+  };
+
+  # shit RAM with 4 cores -> bad time. don't go over 2 jobs.
+  nix.settings.max-jobs = 2;
 
   imports = importModules [
     "locale-raehik"
