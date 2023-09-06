@@ -16,4 +16,6 @@ in {
     isNormalUser = true;
   };
 
+  nix.settings.trusted-users = [ user.name ];
+
 }
