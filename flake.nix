@@ -2,7 +2,7 @@
 
   inputs = {
     # 2023-10-26: need master for fcitx5 package fix (breakpad)
-    nixpkgs.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";

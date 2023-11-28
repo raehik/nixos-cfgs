@@ -19,7 +19,6 @@ in {
     "home-manager"
     "cachix"
     "substitutors/iog"
-    "gaming"
   ];
 
   # This value determines the NixOS release from which the default
