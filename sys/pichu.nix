@@ -7,7 +7,8 @@ in {
   imports = importModules [
     "hardware-pichu"
     "host-pichu"
-    "boot/secure-boot/lanzaboote"
+    #"boot/secure-boot/lanzaboote"
+    "boot/systemd-boot" # required before Lanzaboote
     "net"
     "assorted"
     "user"

@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  efiDevice  = "/dev/disk/by-partlabel/raehik-pichu-efi";
-  rootDevice = "/dev/disk/by-partlabel/raehik-pichu-nixos";
+  efiDevice  = "/dev/disk/by-partlabel/raehik-pichu2-efi";
+  rootDevice = "/dev/disk/by-partlabel/raehik-pichu2-nixos";
 in {
 
   imports = [
