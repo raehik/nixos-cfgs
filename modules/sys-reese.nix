@@ -42,7 +42,7 @@ in {
   nix.settings.max-jobs = 2;
 
   imports = importModules [
-    "locale-raehik"
+    "locale/raehik"
     "net"
     "user"
     #"cachix"

@@ -1,3 +1,5 @@
+# Plain pipewire audio setup.
+
 { pkgs, ... }:
 
 {

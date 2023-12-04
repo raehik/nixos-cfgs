@@ -27,6 +27,4 @@ in  {
     hostName = "kfc";
   };
 
-  services.udisks2.enable = true;
-
 }

@@ -48,7 +48,7 @@
       inputs.lanzaboote.nixosModules.lanzaboote
     ];
     nixosConfigurations.pichu = nixosSystem' "x86_64-linux" [
-      sys/pichu.nix
+      modules/sys-pichu.nix
       inputs.lanzaboote.nixosModules.lanzaboote
     ];
     nixosConfigurations.reese = nixosSystem' "aarch64-linux" [

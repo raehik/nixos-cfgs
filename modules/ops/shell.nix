@@ -1,13 +1,9 @@
-# Stuff that doesn't fit anywhere else.
+# Assorted shell-ish stuff.
 
-{ pkgs, ... }:
-
-{
-
-  programs.nix-ld.enable = true;
+{ pkgs, ... }: {
 
   programs.zsh.enable = true;
-  environment.shells = with pkgs; [ zsh ];
+  environment.shells = [pkgs.zsh];
   users.defaultUserShell = pkgs.zsh;
 
   environment.sessionVariables = rec {
