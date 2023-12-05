@@ -3,6 +3,9 @@
 let
   mod = m: ./${m}.nix;
   modF = m: import (mod m);
+  modNasCauldron = share: folder: modF "ops/nas/lazy"
+    "//192.168.0.74/${share}" "/media/nas/cauldron/${folder}"
+    "raehik" "users" "credentials=/secret/nas/cauldron/raehik";
 in {
 
   networking.hostName = "pichu";
@@ -30,13 +33,12 @@ in {
     ./sw/podman.nix
     ./sw/bluetooth.nix
 
-    ./sw/print/home.nix
     ./sw/gaming.nix
 
-    (modF "ops/nas/lazy"
-          "//192.168.0.74/raehik" "/media/nas/cauldron/raehik"
-          "raehik" "users"
-          "credentials=/secret/nas/cauldron/raehik")
+    # home local network things
+    ./sw/print/home.nix
+    (modNasCauldron "raehik" "raehik")
+    (modNasCauldron "Public" "shared")
   ];
 
 }
