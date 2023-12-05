@@ -32,6 +32,11 @@ in {
 
     ./sw/print/home.nix
     ./sw/gaming.nix
+
+    (modF "ops/nas/lazy"
+          "//192.168.0.74/raehik" "/media/nas/cauldron/raehik"
+          "raehik" "users"
+          "credentials=/secret/nas/cauldron/raehik")
   ];
 
 }
