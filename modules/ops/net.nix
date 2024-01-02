@@ -9,6 +9,6 @@
     connectionConfig = { "connection.mdns" = 2; };
   };
 
-  services.avahi = { enable = true; nssmdns = true; };
+  services.avahi = { enable = true; nssmdns4 = true; };
 
 }
