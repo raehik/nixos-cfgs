@@ -1,10 +1,33 @@
-{ config, pkgs, ... }:
+{ mod, config, pkgs, system, nixos-hardware, ... }:
 
 let
-  importModules = map (module: ../modules/${module}.nix);
+  modF = m: import (mod m);
+  modNasCauldron = share: folder: modF "ops/nas/lazy"
+    "//192.168.0.74/${share}" "/media/nas/cauldron/${folder}"
+    "raehik" "users" "credentials=/secret/nas/cauldron/raehik";
 in {
 
   networking.hostName = "reese";
+  system.stateVersion = "23.11";
+
+  imports = [
+    nixos-hardware.raspberry-pi-4
+    (mod "ops/locale/raehik")
+    (mod "ops/net")
+    (mod "user/raehik")
+    (mod "sw/udisks2")
+    #"cachix"
+    #"substitutors/iog"
+    #"audio"
+    #"bluetooth"
+    #"graphical"
+    #"print/home"
+    #"assorted"
+    #"home-manager"
+    #"podman"
+    (modNasCauldron "raehik" "raehik")
+    (modNasCauldron "Public" "shared")
+  ];
 
   services.openssh = {
     enable = true;
@@ -41,23 +64,6 @@ in {
   # shit RAM with 4 cores -> bad time. don't go over 2 jobs.
   nix.settings.max-jobs = 2;
 
-  imports = importModules [
-    "locale/raehik"
-    "net"
-    "user"
-    #"cachix"
-    #"substitutors/iog"
-    #"audio"
-    #"bluetooth"
-    #"graphical"
-    #"print/home"
-    "assorted"
-    #"home-manager"
-    #"podman"
-  ];
-
-  system.stateVersion = "23.11";
-
   fileSystems."/" = {
     device = "/dev/disk/by-label/NIXOS_SD";
     fsType = "ext4";
@@ -73,7 +79,7 @@ in {
   #};
 
   home-manager.users.raehik = { pkgs, ... }: {
-    home.stateVersion = "23.11";
+    home.stateVersion = system.stateVersion;
 
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
@@ -101,22 +107,6 @@ in {
       # development
       gh # GitHub CLI tool (comes in handy)
     ];
-  };
-
-  services.udisks2.enable = true;
-
-  environment.systemPackages = [ pkgs.cifs-utils ];
-  fileSystems."/mnt/nas/cauldron/raehik" = {
-      device = "//cauldron.local/raehik";
-      fsType = "cifs";
-      options = let
-        # this line prevents hanging on network split
-        automount_opts =
-          "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=10s,x-systemd.mount-timeout=10s";
-        permission_opts = "uid=${toString config.users.users."raehik".uid},gid=${toString config.users.groups."users".gid}";
-
-      in
-      ["${automount_opts},credentials=/secret/samba/cauldron/raehik,${permission_opts}"];
   };
 
 }

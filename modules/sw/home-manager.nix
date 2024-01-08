@@ -1,4 +1,12 @@
+stateVersion: user: { home-manager, lib, ... }:
+
 {
+
+  imports = [
+    home-manager.home-manager {
+      home-manager.useGlobalPkgs = true;
+    }
+  ];
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
@@ -8,65 +16,10 @@
   #  keep-outputs = true;
   #};
 
-  home-manager.users.raehik = { pkgs, ... }: {
+  home-manager.users.${user} = { pkgs, ... }: {
     home.stateVersion = "22.11";
-
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
-
-    home.packages = with pkgs; [
-      # basic
-      openssl
-      neovim
-      tmux
-      ripgrep
-      ## filesystems
-      udisks
-      cifs-utils
-      ntfs3g
-      ## files
-      atool
-      unzip
-      zip
-      p7zip
-      #unrar # TODO: unfree...?!
-      ## admin
-      htop
-
-      # development
-      git
-      delta # for nicer git diff
-      gh # GitHub CLI tool (comes in handy)
-      gcc
-
-      # graphical
-      gammastep
-      sway
-      i3status-rust
-      wl-clipboard
-      mako
-      slurp
-      grim
-      xdg-utils
-
-      # terminal apps
-      mpd
-      ncmpcpp
-      weechat
-
-      # graphical apps
-      foot
-      pavucontrol
-      firefox
-      chromium
-      hexchat
-      sxiv
-      zathura
-      discord # TODO: unfree
-
-      # laptop
-      brightnessctl
-    ];
   };
 
 }

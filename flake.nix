@@ -22,22 +22,28 @@
 
     nixosSystem' = system: extraModules: inputs.nixpkgs.lib.nixosSystem {
       system = system;
+      specialArgs = {
+        mod = m: ./modules/${m}.nix;
+        home-manager = inputs.home-manager.nixosModules;
+        nixos-hardware = inputs.nixos-hardware.nixosModules;
+      };
       modules = [
         # general & flake-related bits
         ({ ... }: {
-          # need this! home-manager fails without it :O
-          nix.settings.experimental-features = ["nix-command" "flakes"];
-
           # set revision (obtain via nixos-version --json)
           # null on dirty worktree!
           system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
+
+          # need this! home-manager fails without it :O
+          # TODO check which ones it needs
+          #nix.settings.experimental-features = ["nix-command" "flakes"];
         })
 
         # TODO
-        inputs.home-manager.nixosModules.home-manager {
-          # TODO
-          home-manager.useGlobalPkgs = true;
-        }
+        #inputs.home-manager.nixosModules.home-manager {
+        #  # TODO
+        #  home-manager.useGlobalPkgs = true;
+        #}
       ] ++ extraModules;
     };
 

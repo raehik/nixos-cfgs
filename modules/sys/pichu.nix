@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
+{ mod, config, pkgs, system, lib, ... }:
 
 let
-  mod = m: ../${m}.nix;
   modF = m: import (mod m);
   modNasCauldron = share: folder: modF "ops/nas/lazy"
     "//192.168.0.74/${share}" "/media/nas/cauldron/${folder}"
     "raehik" "users" "credentials=/secret/nas/cauldron/raehik";
+  modPkgList = pkgList:
+    modF "sw/home-manager/user-home-pkgs" "raehik" (modF "pkgs/${pkgList}");
 in {
 
   networking.hostName = "pichu";
@@ -26,12 +27,14 @@ in {
     (mod "ops/nix/cachix")
     (mod "ops/nix/substitutors/iog")
 
+    (mod "hw/bluetooth")
     (mod "sw/audio")
-    (mod "sw/home-manager")
+    (modF "sw/home-manager" system.stateVersion "raehik")
+    (modPkgList "base")
+    (modPkgList "graphical")
     (mod "sw/udisks2")
     (mod "sw/graphical")
     (mod "sw/podman")
-    (mod "sw/bluetooth")
 
     (mod "sw/gaming")
 
