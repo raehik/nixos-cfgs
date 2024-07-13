@@ -1,4 +1,4 @@
-{ mod, config, pkgs, system, nixos-hardware, ... }:
+{ mod, config, pkgs, system, ... }:
 
 let
   modF = m: import (mod m);
@@ -13,7 +13,7 @@ in {
   imports = [
     (mod "ops/locale/raehik")
     (mod "ops/net")
-    (mod "user/raehik")
+    (mod "ops/user/raehik")
     (mod "sw/udisks2")
     #"cachix"
     #"substitutors/iog"
@@ -22,7 +22,7 @@ in {
     #"graphical"
     #"print/home"
     #"assorted"
-    #"home-manager"
+    #(modF "sw/home-manager" system.stateVersion "raehik")
     #"podman"
     (modNasCauldron "raehik" "raehik")
     (modNasCauldron "Public" "shared")
