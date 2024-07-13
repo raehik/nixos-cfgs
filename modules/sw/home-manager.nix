@@ -2,6 +2,9 @@ stateVersion: user: { lib, home-manager, ... }:
 
 {
 
+  # TODO unsure about this
+  nix.settings.experimental-features = ["nix-command"];
+
   imports = [
     home-manager.home-manager {
       home-manager.useGlobalPkgs = true;
