@@ -58,7 +58,7 @@
       inputs.lanzaboote.nixosModules.lanzaboote
     ];
     nixosConfigurations.reese = nixosSystem' "aarch64-linux" [
-      sys/reese.nix
+      modules/sys/reese.nix
       inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ];
 

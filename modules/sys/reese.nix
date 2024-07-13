@@ -11,7 +11,6 @@ in {
   system.stateVersion = "23.11";
 
   imports = [
-    nixos-hardware.raspberry-pi-4
     (mod "ops/locale/raehik")
     (mod "ops/net")
     (mod "user/raehik")
