@@ -5,6 +5,8 @@ let
   modNasCauldron = share: folder: modF "ops/nas/lazy"
     "//192.168.0.74/${share}" "/media/nas/cauldron/${folder}"
     "raehik" "users" "credentials=/secret/nas/cauldron/raehik";
+  modPkgList = pkgList:
+    modF "sw/home-manager/user-home-pkgs" "raehik" (modF "pkgs/${pkgList}");
 in {
 
   networking.hostName = "reese";
@@ -15,15 +17,9 @@ in {
     (mod "ops/net")
     (mod "ops/user/raehik")
     (mod "sw/udisks2")
-    #"cachix"
-    #"substitutors/iog"
-    #"audio"
-    #"bluetooth"
-    #"graphical"
-    #"print/home"
-    #"assorted"
-    #(modF "sw/home-manager" system.stateVersion "raehik")
-    #"podman"
+    (modF "sw/home-manager" system.stateVersion "raehik")
+    (modPkgList "base")
+    (modPkgList "graphical")
     (modNasCauldron "raehik" "raehik")
     (modNasCauldron "Public" "shared")
   ];
@@ -69,43 +65,9 @@ in {
     options = [ "noatime" ];
   };
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-
   #nix.extraOptions = {
   #  keep-derivations = true;
   #  keep-outputs = true;
   #};
-
-  home-manager.users.raehik = { pkgs, ... }: {
-    home.stateVersion = system.stateVersion;
-
-    programs.direnv.enable = true;
-    programs.direnv.nix-direnv.enable = true;
-
-    home.packages = with pkgs; [
-      # basic
-      openssl
-      neovim
-      tmux
-      ripgrep
-      git
-      delta # for nicer git diff
-      ## filesystems
-      cifs-utils
-      ntfs3g
-      ## files
-      atool
-      unzip
-      zip
-      p7zip
-      #unrar # TODO: unfree...?!
-      ## admin
-      htop
-
-      # development
-      gh # GitHub CLI tool (comes in handy)
-    ];
-  };
 
 }
