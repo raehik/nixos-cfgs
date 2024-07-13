@@ -20,7 +20,6 @@ in {
     (mod "sw/udisks2")
     (modF "sw/home-manager" config.system.stateVersion "raehik")
     (modPkgList "base")
-    (modPkgList "graphical")
     (modNasCauldron "raehik" "raehik")
     (modNasCauldron "Public" "shared")
   ];
