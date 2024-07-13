@@ -16,6 +16,7 @@ in {
   imports = [
     (mod "ops/locale/raehik")
     (mod "ops/net")
+    (mod "ops/shell")
     (mod "ops/user/raehik")
     (mod "sw/udisks2")
     (modF "sw/home-manager" config.system.stateVersion "raehik")
