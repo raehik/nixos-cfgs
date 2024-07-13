@@ -1,4 +1,4 @@
-stateVersion: user: { home-manager, lib, ... }:
+stateVersion: user: { lib, home-manager, ... }:
 
 {
 
@@ -17,7 +17,7 @@ stateVersion: user: { home-manager, lib, ... }:
   #};
 
   home-manager.users.${user} = { pkgs, ... }: {
-    home.stateVersion = "${stateVersion}";
+    home.stateVersion = stateVersion;
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
   };

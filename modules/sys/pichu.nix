@@ -1,4 +1,4 @@
-{ mod, config, pkgs, system, lib, ... }:
+{ mod, config, pkgs, lib, ... }:
 
 let
   modF = m: import (mod m);
@@ -9,6 +9,7 @@ let
     modF "sw/home-manager/user-home-pkgs" "raehik" (modF "pkgs/${pkgList}");
 in {
 
+  nixpkgs.hostPlatform = "x86_64-linux";
   networking.hostName = "pichu";
   system.stateVersion = "22.11";
 
@@ -29,7 +30,7 @@ in {
 
     (mod "hw/bluetooth")
     (mod "sw/audio")
-    (modF "sw/home-manager" system.stateVersion "raehik")
+    (modF "sw/home-manager" config.system.stateVersion "raehik")
     (modPkgList "base")
     (modPkgList "graphical")
     (mod "sw/udisks2")

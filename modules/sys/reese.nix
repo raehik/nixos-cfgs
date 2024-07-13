@@ -9,6 +9,7 @@ let
     modF "sw/home-manager/user-home-pkgs" "raehik" (modF "pkgs/${pkgList}");
 in {
 
+  nixpkgs.hostPlatform = "aarch64-linux";
   networking.hostName = "reese";
   system.stateVersion = "23.11";
 
@@ -17,7 +18,7 @@ in {
     (mod "ops/net")
     (mod "ops/user/raehik")
     (mod "sw/udisks2")
-    (modF "sw/home-manager" system.stateVersion "raehik")
+    (modF "sw/home-manager" config.system.stateVersion "raehik")
     (modPkgList "base")
     (modPkgList "graphical")
     (modNasCauldron "raehik" "raehik")
