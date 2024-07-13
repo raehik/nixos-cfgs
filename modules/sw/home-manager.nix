@@ -17,7 +17,7 @@ stateVersion: user: { home-manager, lib, ... }:
   #};
 
   home-manager.users.${user} = { pkgs, ... }: {
-    home.stateVersion = "22.11";
+    home.stateVersion = "${stateVersion}";
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
   };
