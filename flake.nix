@@ -32,7 +32,7 @@
           system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
 
           # deploying with a flake so enable them universally or it's confusing
-          nix.settings.experimental-features = ["flakes"]
+          nix.settings.experimental-features = ["flakes"];
         })
       ] ++ extraModules;
     };
