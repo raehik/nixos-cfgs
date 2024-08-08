@@ -9,6 +9,9 @@
     fcitx5.addons = with pkgs; [fcitx5-mozc fcitx5-gtk];
   };
 
+  # autostart IME on Sway etc. see: https://nixos.wiki/wiki/Fcitx5
+  services.xserver.desktopManager.runXdgAutostartIfNone = true;
+
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk
