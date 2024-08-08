@@ -2,9 +2,10 @@
 
 {
 
-  # TODO 2023-03-03 Japanese IME. they all suck
+  # TODO 2024-08-08 Japanese IME. they all suck
   i18n.inputMethod = {
-    enabled = "fcitx5";
+    type = "fcitx5";
+    enable = true;
     fcitx5.addons = with pkgs; [fcitx5-mozc fcitx5-gtk];
   };
 
