@@ -10,6 +10,7 @@
   };
 
   # autostart IME on Sway etc. see: https://nixos.wiki/wiki/Fcitx5
+  # 2024-08-08: doesn't seem to work. lol. oh well idc just run manually
   services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
   fonts.packages = with pkgs; [
