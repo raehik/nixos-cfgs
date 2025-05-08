@@ -22,6 +22,7 @@
     fira-code
     font-awesome # TODO 2022-12-14 specifically for i3status-rs...
     roboto
+    kochi-substitute # MS Mincho replacement
   ];
 
   # xdg desktop integration for screen sharing
